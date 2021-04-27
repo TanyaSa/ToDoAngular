@@ -1,0 +1,61 @@
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        [formControl]="emailFormControl"
+        placeholder="Ex. pat@example.com"
+      />
+      <!-- <mat-error
+        *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
+      >
+        Please enter a valid email address
+      </mat-error> -->
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Full name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        [formControl]="passwordFormControl"
+        placeholder="Ex. VeryHardPassword!1"
+      />
+      <!-- <mat-error
+        *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
+      >
+        Please enter a valid password
+      </mat-error> -->
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    <h4>Role</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Select Role</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="role">
+        <mat-option *ngFor="let role of roles" [value]="role.value">
+          {{role.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <p> Selected food: {{selectedValue}} </p> -->
+  
+  </form>

@@ -1,0 +1,95 @@
+@import "../../../assets/scss/palette";
+
+.wrapper {
+    position: relative;
+}
+$table-width: 800px;
+td {
+    align-items: center;
+}
+
+table {
+    padding-top: 40px;
+    width: $table-width;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+
+    tr:last-child td {
+        border-bottom: 0 solid;
+    }
+}
+
+tbody {
+    background-color: #fff;
+}
+
+.itemTime {
+    width: 7% !important;
+}
+
+.itemCheckbox {
+    flex: 0 0 28% !important;
+    width: 7% !important;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+    height: 70px !important;
+}
+
+input {
+    border-style: none;
+    outline: none;
+}
+
+//buttons
+.addButton {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -25px;
+    right: 20px;
+    font-size: 23px;
+}
+
+.remove-button,
+.edit-button {
+    border-width: 0;
+    background-color: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+.remove-button:hover {
+    color: $awesome-red;
+}
+.edit-button:hover {
+    margin-right: 12px;
+    color: $awesome-blue;
+}
+
+td.mat-cell:last-of-type {
+    padding-right: 0px;
+    width: 10px;
+    width: 9% !important;
+}
+
+//checkbox
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: $awesome-blue;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+    background-color: $awesome-red !important;
+}
+
+.checked-state {
+    text-decoration: line-through;
+    color: gray;
+}
