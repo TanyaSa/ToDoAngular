@@ -1,11 +1,12 @@
 export class ListType {
-    name: string;
+    title: string;
     creationTime: string;
-    isChecked: boolean;
+    isCompleted: boolean;
+    _id: string;
 
     constructor(){
         const currentDate = new Date();
         this.creationTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
-        this.isChecked = false;
+        this.isCompleted = false;
     }
 }

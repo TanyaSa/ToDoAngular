@@ -1,23 +1,10 @@
 <nav>
-    <div routerLink="/checklist" routerLinkActive="active">1</div>
-    <div routerLink="/signin" routerLinkActive="active">2</div>
-    <div routerLink="/registration" routerLinkActive="active">3</div>
+    <a routerLink="" routerLinkActive="active" hidden>Checklist </a>
+    <a routerLink="/signin" routerLinkActive="active" hidden>Signin </a>
+    <a routerLink="/registration" routerLinkActive="active" hidden>Registration</a>
+    <div class="sign-out">
+        <a routerLink="/signin" routerLinkActive="active" (click)="signOut()"> Sign-out </a>
+    </div>
 </nav>
-
-<!-- <div>
-    <app-registration>
-
-    </app-registration>
-</div> -->
-
-<!-- add routing into app.module.ts -->
-<!-- create separate module with list -->
-<!-- 
-<div>
-    <app-checklist>
-        
-    </app-checklist>
-    
-</div> -->
 
 <router-outlet></router-outlet>

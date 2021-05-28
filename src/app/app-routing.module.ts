@@ -1,33 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth-guard.guard';
+import { pathMatcher } from './modules/auth/auth-routing.module';
+import { Role } from './modules/auth/role';
 
-import { ChecklistComponent } from './checkList/checklist/checklist.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { SigninComponent } from './signin/signin.component';
 
 const appRoutes: Routes = [
+
     {
-        path: 'registration',
-        component: RegistrationComponent
+        matcher: pathMatcher,
+        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
     },
     {
-        path: 'signin',
-        component: SigninComponent
+        path: '',
+        loadChildren: () => import('./modules/checklist/checklist.module').then(m => m.ChecklistModule),
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin, Role.User] }
     },
     {
-        path: 'checklist',
-        component: ChecklistComponent
+        path: '**',
+        redirectTo: ''
     }
 
 ];
 
 @NgModule({
     imports: [
-      RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes)
     ],
     exports: [
         RouterModule
     ]
-  })
+})
 
 export class AppRoutingModule { }

@@ -11,5 +11,4 @@ export class ChecklistComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 import { ItemService } from '../services/item.service';
 import { ListType } from './list.type';
 
@@ -8,11 +9,25 @@ import { ListType } from './list.type';
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
 })
-export class ItemComponent {
+export class ItemComponent implements OnInit {
     dataSource: Observable<Array<ListType>> = this.itemService.dataSource;
     placeholderTest = 'Enter description here...';
     displayedColumns = ['select', 'description', 'time', 'actions'];
-    constructor(private itemService: ItemService) { }
+    email = 'abc';
+    password = '123';
+    lists: ListType;
+
+    constructor(private itemService: ItemService, private authService: AuthService) { }
+
+    ngOnInit(): void {
+        console.log('ngOnInit');
+        this.itemService.getChecklist();
+    }
+
+    get isAdmin(): boolean {
+        console.log('isadmin');
+        return this.authService.isAdmin;
+    }
 
     getTime(): string {
         const creationTime = '10PM';

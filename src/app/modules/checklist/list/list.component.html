@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <!-- <button mat-fab color="primary" class="addButton" (click)="addNewItem()" *ngIf="!isAdmin"> -->
+    <button mat-fab color="primary" class="addButton" (click)="addNewItem()" *ngIf="'add' | able: 'Todo'">
+
+        <div class="plus">&#43;</div>
+    </button>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="select">
+            <td mat-cell *matCellDef="let item" class="itemCheckbox">
+                <mat-checkbox [checked]="item.isCompleted" (change)="getChecked(item)"></mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <td mat-cell *matCellDef="let item" class="itemDescription" [ngClass]="{'checked-state': item.isCompleted}">
+                <input matInput placeholder="Name" [(ngModel)]="item.title" placeholder="Enter description...">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+            <td mat-cell *matCellDef="let item" class="itemTime">{{item.creationTime}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <td mat-cell *matCellDef="let item" class="remove-cell">
+                <!-- <button (click)="removeItem(item)" class="remove-button" *ngIf="isAdmin">x</button> -->
+                <button (click)="removeItem(item)" class="remove-button" *ngIf="'remove' | able: 'item'">x</button>
+
+                <button (click)="updateItem(item)" class="edit-button">save</button> 
+            </td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
