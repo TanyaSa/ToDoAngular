@@ -11,6 +11,7 @@ import { RefreshTokenInterceptor } from './core/interceptors/tokens.interceptor'
 import { Ability, PureAbility } from '@casl/ability';
 import { ErrorHandterInterceptor } from './core/interceptors/errorHandler.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorHandterInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandterInterceptor },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
     { provide: Ability, useValue: new Ability() },
     { provide: PureAbility, useExisting: Ability }
   ],

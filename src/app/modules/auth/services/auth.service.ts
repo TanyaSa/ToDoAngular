@@ -10,6 +10,8 @@ import { User } from '../user';
 import jwt_decode from 'jwt-decode';
 import { Role } from '../role';
 import { Ability, AbilityBuilder } from '@casl/ability';
+import { request } from 'node:http';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ import { Ability, AbilityBuilder } from '@casl/ability';
 export class AuthService {
 
   loginUrl = '/auth/sign-in';
+  registerUrl = '/auth/sign-up';
   checklistUrl = '/rest/checklist';
   refreshUrl = '/auth/refresh';
   signoutUrl = '/auth/sign-out';
@@ -30,7 +33,7 @@ export class AuthService {
   public get token(): string {
     return this._tokens?.accessToken;
   }
-  constructor(private http: HttpClient, private router: Router, private ability: Ability) {
+  constructor(private http: HttpClient, private router: Router, private ability: Ability, private errorService: MessageService) {
     const accessToken = localStorage.getItem('AuthToken');
     const refreshToken = localStorage.getItem('RefreshToken');
     this._tokens = { accessToken, refreshToken };
@@ -58,6 +61,26 @@ export class AuthService {
       this.updateAbility(this.currentUser);
       this._tokens = e;
     }), map(e => true)).pipe();
+  }
+
+  register(email, password, fullName): Observable<User> {
+    const a = environment.host + this.registerUrl;
+    return this.http.post<User>(a, { email, password, fullName }, {
+      responseType: 'json',
+      // params: { setAuthToken: 'false' }
+    }).pipe(tap(e => {
+      console.log(e);
+      this.errorService.showInfo('User ' + fullName + ' created.');
+      // localStorage.setItem('AuthToken', e.accessToken);
+      // localStorage.setItem('RefreshToken', e.refreshToken);
+      // this.currentUser = this.decodeToken(e.accessToken);
+      // this.updateAbility(this.currentUser);
+      // this._tokens = e;
+
+      this.router.navigate(['/signin']);
+      return fullName;
+    }));
+    // map(e => false)).pipe();
   }
 
   private updateAbility(user): void {

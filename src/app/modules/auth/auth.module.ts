@@ -8,6 +8,7 @@ import { SigninComponent } from './sign-in/signin.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ErrorDirective } from 'src/app/shared/error.directive';
 import { ErrorHandterInterceptor } from 'src/app/core/interceptors/errorHandler.interceptor';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ErrorHandterInterceptor } from 'src/app/core/interceptors/errorHandler.
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
   providers: [{ provide: ErrorHandler, useClass: ErrorHandterInterceptor }]

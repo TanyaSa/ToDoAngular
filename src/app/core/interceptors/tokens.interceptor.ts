@@ -40,8 +40,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                     console.log('switchMap-modifiedReq!!!');
 
                     return next.handle(modifiedReq);
-                })
-            ).pipe(catchError(() => this.authService.logout()));
+                }));
+            // ).pipe(catchError(() => this.authService.logout()));
         } else {
             console.log('else-switchMap-modifiedReq!!!');
             return this.refreshTokenSubject.pipe(

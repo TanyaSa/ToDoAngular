@@ -36,4 +36,8 @@ export class SigninComponent {
         return true;
       });
   }
+
+  registrationRedirect(): void {
+    this.router.navigate(['/registration']);
+  }
 }

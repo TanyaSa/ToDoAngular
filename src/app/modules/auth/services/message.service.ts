@@ -28,7 +28,8 @@ export class MessageService {
       this._snackBar.open(message, null, {
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
-        panelClass: `${messageType}-message`
+        panelClass: `${messageType}-message`,
+        duration: 3000
       });
     });
   }
