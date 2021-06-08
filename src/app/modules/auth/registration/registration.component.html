@@ -9,16 +9,10 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td> -->
   <mat-form-field class="example-full-width">
     <mat-label>Full name</mat-label>
     <input matInput formControlName="usernameFormControl" />
   </mat-form-field>
-  <!-- </td>
-    </tr>
-  </table> -->
 
   <mat-form-field class="example-full-width">
     <mat-label>Password</mat-label>
@@ -35,29 +29,11 @@
     <mat-error *appErrorDirective="'passwordConfirmFormControl'">
       Passwords should <strong>match</strong>
     </mat-error>
-
-    <!-- <mat-error *appErrorDirective="'passwordFormControl'">
-      Password is <strong>required</strong>
-    </mat-error>  -->
   </mat-form-field>
 
-  <!-- <h4>Role</h4> -->
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Select Role</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="role" formControlName="roleFormControl">
-      <mat-option *ngFor="let role of roles" [value]="role.value">
-        {{role.viewValue}}
-      </mat-option>
-    </mat-select>
-
-    <mat-error *appErrorDirective="'roleFormControl'">
-      Role is <strong>required</strong>
-    </mat-error>
-  </mat-form-field> -->
-
   <div class="buttons">
-    <button mat-raised-button color="primary" class="signin-button" (click)="registration()">Gegister</button>
-    <button mat-stroked-button color="primary" class="registaration-button" (click)="signinRedirect()">Cancel</button>
+    <button type="button" mat-raised-button color="primary" class="signin-button" (click)="registration()">Gegister</button>
+    <button type="button" mat-stroked-button color="primary" class="registaration-button" (click)="signinRedirect()">Cancel</button>
   </div>
 
 </form>

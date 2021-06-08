@@ -16,7 +16,6 @@ export class ErrorHandterInterceptor implements ErrorHandler {
         if (!environment.production) {
             console.error(error);
         }
-        
         if (error instanceof CustomError) {
             this.handleServerError(error);
         }
@@ -42,7 +41,7 @@ export class ErrorHandterInterceptor implements ErrorHandler {
         // }
     }
     private handleServerError(error: CustomError): void {
-        if (error.innerError.status === 403){
+        if (error.innerError.status === 403) {
             this.errorService.showInfo('Session Expired.');
             this.authService.logout();
         } else if (error.innerError.status === 500) {
@@ -52,5 +51,3 @@ export class ErrorHandterInterceptor implements ErrorHandler {
         }
     }
 }
-
-

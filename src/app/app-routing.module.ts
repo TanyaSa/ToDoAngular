@@ -4,7 +4,6 @@ import { AuthGuard } from './auth-guard.guard';
 import { pathMatcher } from './modules/auth/auth-routing.module';
 import { Role } from './modules/auth/role';
 
-
 const appRoutes: Routes = [
 
     {
@@ -15,13 +14,13 @@ const appRoutes: Routes = [
         path: '',
         loadChildren: () => import('./modules/checklist/checklist.module').then(m => m.ChecklistModule),
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin, Role.User] }
+        data: { roles: [Role.Admin, Role.User], animation: 'AllPage' },
     },
     {
         path: '**',
-        redirectTo: ''
+        redirectTo: '',
+        data: {animation: 'AboutPage'}
     }
-
 ];
 
 @NgModule({

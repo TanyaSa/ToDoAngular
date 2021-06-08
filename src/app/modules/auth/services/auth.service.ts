@@ -1,16 +1,15 @@
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ListType } from '../../checklist/list/list.type';
 import { Tokens } from '../../checklist/list/tokens.model';
 import { environment } from 'src/environments/environment';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '../user';
 import jwt_decode from 'jwt-decode';
 import { Role } from '../role';
 import { Ability, AbilityBuilder } from '@casl/ability';
-import { request } from 'node:http';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -27,7 +26,6 @@ export class AuthService {
   password = '123';
   lists: ListType;
 
-  // private _localStorage: Storage;
   private currentUser: User;
   private _tokens: Tokens;
   public get token(): string {
@@ -67,20 +65,12 @@ export class AuthService {
     const a = environment.host + this.registerUrl;
     return this.http.post<User>(a, { email, password, fullName }, {
       responseType: 'json',
-      // params: { setAuthToken: 'false' }
     }).pipe(tap(e => {
       console.log(e);
       this.errorService.showInfo('User ' + fullName + ' created.');
-      // localStorage.setItem('AuthToken', e.accessToken);
-      // localStorage.setItem('RefreshToken', e.refreshToken);
-      // this.currentUser = this.decodeToken(e.accessToken);
-      // this.updateAbility(this.currentUser);
-      // this._tokens = e;
-
       this.router.navigate(['/signin']);
       return fullName;
     }));
-    // map(e => false)).pipe();
   }
 
   private updateAbility(user): void {
@@ -109,7 +99,6 @@ export class AuthService {
     return this.currentUser.role;
   }
 
-
   updateTokensPair(): Observable<boolean> {
     const a = environment.host + this.refreshUrl;
     return this.http.post<Tokens>(a, { refreshToken: this._tokens.refreshToken }, {
@@ -120,7 +109,6 @@ export class AuthService {
       this._tokens = newTokensPair;
     }), map(newTokensPair => true));
   }
-
 
   logout(): Observable<any> {
     localStorage.clear();
@@ -133,9 +121,5 @@ export class AuthService {
     this.router.navigateByUrl('/signin');
 
     return this.http.post(a, { responseType: 'json' });
-
   }
-
 }
-
-

@@ -23,16 +23,14 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorHandterInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandterInterceptor },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
     { provide: Ability, useValue: new Ability() },
     { provide: PureAbility, useExisting: Ability }
   ],

@@ -18,11 +18,13 @@ export function  pathMatcher(segments: UrlSegment[], group: UrlSegmentGroup, rou
 const routes: Routes = [
   {
     path: 'signin',
-    component: SigninComponent
+    component: SigninComponent,
+    data: {animation: 'SigninPage'}
   },
   {
     path: 'registration',
-    component: RegistrationComponent
+    component: RegistrationComponent,
+    data: {animation: 'RegistrationPage'}
   }
 ];
 

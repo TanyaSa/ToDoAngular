@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { confirm } from '../password.validator';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
 import { CustomValidators } from 'src/app/modules/auth/password.validator';
+// import { fadeInAnimation } from '../../route-animations';
 
 interface Roles {
   value: string;
@@ -14,7 +14,10 @@ interface Roles {
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  // animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  // host: { '[@fadeInAnimation]': '' }
 })
 export class RegistrationComponent {
   selectedValue: string;
@@ -31,8 +34,6 @@ export class RegistrationComponent {
     ]),
     usernameFormControl: new FormControl('', []),
     passwordConfirmFormControl: new FormControl('', [
-      // Validators.required,
-      // confirm(this.registrationForm.get('passwordFormControl').value),
     ]),
   },
     CustomValidators.passwordConfirmValidator
@@ -48,13 +49,10 @@ export class RegistrationComponent {
   }
 
   registration(): boolean {
-    // this.router.navigate(['/registration']);
-
     if (!this.registrationForm.valid) {
       this.registrationForm.markAllAsTouched();
       return false;
     }
-
     const {
       passwordFormControl,
       usernameFormControl,
@@ -66,14 +64,8 @@ export class RegistrationComponent {
       usernameFormControl.value,
       passwordConfirmFormControl.value
     ).subscribe(e => {
-        this.router.navigate(['/checklist']);    // tanya1@mail.com  12345678
-        return true;
-      });
+      this.router.navigate(['/checklist']);    // tanya1@mail.com  12345678
+      return true;
+    });
   }
-
-  // MustMatch() {
-  //   const pass = this.registrationForm.get('passwordFormControl').value;
-  //   const confirm = this.registrationForm.get('passwordConfirmFormControl').value;
-  // }
-
 }

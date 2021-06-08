@@ -7,4 +7,8 @@
     </div>
 </nav>
 
-<router-outlet></router-outlet>
+<!-- <main [@fadeInAnimation]="router.url"> -->
+<div [@fadeInAnimation]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>
+<!-- </main> -->
